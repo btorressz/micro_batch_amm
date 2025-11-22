@@ -294,5 +294,20 @@ Individual order (**107 bytes**).
 | `quote_deposit_fp` | `u64` | Quote deposited (bids only) |
 | `id` | `u64` | Unique order ID |
 
+
+---
+
+### **UserBatchStats**
+Per-user-per-batch tracking (**93 bytes**).
+
+| Field | Type | Description |
+|-------|-------|-------------|
+| `user` | `Pubkey` | User |
+| `market` | `Pubkey` | Market |
+| `batch_id` | `u64` | Batch number |
+| `order_count` | `u32` | Orders placed by user |
+| `notional_quote_fp` | `u128` | Total notional (1e6) |
+
+
 ---
 
