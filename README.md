@@ -447,3 +447,20 @@ let price_fp = (price_decimal * 1_000_000.0) as u64;
 // Fixed-point → user-facing
 let price_decimal = price_fp as f64 / 1_000_000.0;
 
+
+___
+
+
+### **Events**
+
+| Event | Emitted By | Key Fields |
+|-------|-------------|-------------|
+| **MarketInitialized** | `initialize_market` | market, authority, mints, batch_duration |
+| **OrderPlaced** | `place_order` | market, order, user, side, limit_price, amount, batch_id |
+| **BatchCleared** | `clear_batch` | market, batch_id, clearing_price, volumes |
+| **OrderSettled** | `settle_order` | order, batch_id, clearing_price, fills, refunds |
+| **OrderCancelled** | `cancel_order` | order, batch_id, side |
+| **PausedSet** | `set_paused` | market, paused, reason |
+| **ParamsUpdated** | `set_params` | market, new fee/risk params |
+| **MarketView** | `view_market` | Complete market state snapshot |
+
