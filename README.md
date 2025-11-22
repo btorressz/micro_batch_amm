@@ -489,5 +489,5 @@ ___
 | **BatchFullySettled** | All volume already settled |
 
 
-| **MarketView** | `view_market` | Complete market state snapshot |
+---
 
