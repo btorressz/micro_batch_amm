@@ -181,4 +181,61 @@ Computes the **uniform clearing price** and rolls to the next batch.
 
    ---
 
+  ### **Requirements (Cancel Order)**
+
+**Batch must still be open**  
+`current_slot < last_batch_slot + batch_duration_slots`  
+**Order must not be cancelled or filled**
+
+---
+
+### **Behavior**
+
+- Refunds full deposit (base for asks, quote for bids)  
+- Marks order as `cancelled = true`
+
+---
+
+### **Accounts**
+
+- **user**: Order owner (signer)  
+- **market, order**: Order to cancel  
+- **vault_base, vault_quote**: Market vaults  
+- **user_base_ata, user_quote_ata**: User's token accounts  
+
+---
+
+### **set_paused**
+
+Pauses or unpauses the market (admin only).
+
+**Parameters:**
+
+- `paused`: `true` to pause, `false` to unpause  
+- `pause_reason`: Numeric code (e.g., `1 = emergency`, `2 = maintenance`)  
+
+---
+
+### **set_params**
+
+Updates risk and fee parameters (admin only).
+
+**Parameters:**
+
+- `new_fee_bps`: Updated fee basis points  
+- `max_notional_per_batch_quote_fp`: Max quote notional per batch  
+- `max_notional_per_user_per_batch_quote_fp`: Max quote notional per user per batch  
+- `max_orders_global_per_batch`: Global order count cap  
+- `max_price_move_bps`: Circuit breaker (max % price change from last clearing)  
+- `keeper_fee_bps`: Keeper incentive fee  
+- `min_base_order_fp`, `min_quote_order_fp`: Dust order minimums  
+- `protocol_fee_bps`, `referral_fee_bps`: Fee split (protocol + referral ≤ new_fee_bps)  
+
+---
+
+### **view_market**
+
+Emits a `MarketView` event with all key market parameters (for off-chain indexers / UIs).
+
+
 ---
