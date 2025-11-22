@@ -460,5 +460,31 @@ ___
 | **OrderCancelled** | `cancel_order` | order, batch_id, side |
 | **PausedSet** | `set_paused` | market, paused, reason |
 | **ParamsUpdated** | `set_params` | market, new fee/risk params |
+
+---
+
+### **Error Codes**
+
+| Error | Description |
+|--------|-------------|
+| **MathOverflow** | Arithmetic overflow |
+| **InvalidFeeBps** | Fee > 10,000 bps or invalid split |
+| **MarketPaused** | Operation blocked due to pause |
+| **InvalidPrice** | Limit price ≤ 0 |
+| **InvalidAmount** | Order amount ≤ 0 |
+| **BatchNotReady** | Batch duration not elapsed |
+| **TooManyOrdersForUser** | Exceeded per-user order cap |
+| **MaxNotionalPerUserExceeded** | Exceeded user notional cap |
+| **MaxNotionalPerBatchExceeded** | Exceeded batch notional cap |
+| **MaxOrdersGlobalExceeded** | Exceeded global order cap |
+| **DustOrderTooSmall** | Order below dust threshold |
+| **PriceMoveTooLarge** | Clearing price violates circuit breaker |
+| **KeeperNotAllowed** | Unauthorized keeper |
+| **OrderCancelled** | Operation on cancelled order |
+| **OrderAlreadySettled** | Order already processed |
+| **BatchAlreadyClosed** | Cancellation after batch close |
+| **BatchNotCleared** | Settlement before clearing |
+| **BatchFullySettled** | All volume already settled |
+
 | **MarketView** | `view_market` | Complete market state snapshot |
 
