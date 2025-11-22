@@ -348,3 +348,102 @@ Settlement record (**73 bytes**).
 
 ---
 
+
+## ⚠️ Risk Controls
+
+### 🔒 **Notional Caps**
+- **Per-batch cap (`max_notional_per_batch_quote_fp`)**  
+  Limits total quote volume per batch  
+- **Per-user cap (`max_notional_per_user_per_batch_quote_fp`)**  
+  Prevents a single user from dominating a batch  
+
+---
+
+### 📉 **Order Count Limits**
+- **Per-user (`max_orders_per_user_per_batch`)**  
+  Limits number of orders one user can submit per batch  
+- **Global (`max_orders_global_per_batch`)**  
+  Limits total orders allowed in a batch  
+
+---
+
+### 🚨 **Price Band Circuit Breaker**
+- **`max_price_move_bps`**: Max % deviation from `last_clearing_price_fp` (e.g., 500 = 5%)  
+- Batch clearing **fails** if price moves beyond threshold  
+- Set to **0** to disable  
+
+---
+
+### 🧹 **Dust Order Filters**
+- **`min_base_order_fp`**: Minimum base size for asks  
+- **`min_quote_order_fp`**: Minimum notional for bids  
+- Prevents spam orders and unnecessary computation  
+
+---
+
+## 💰 Fee Structure
+
+### 🏛️ **Protocol Fees**
+- Deducted from quote volume on all matched trades  
+- Accrued in **`protocol_fees_accrued_fp`** (withdrawable by admin)  
+- Split into:  
+  - `protocol_fee_bps` (treasury)  
+  - `referral_fee_bps` (planned)  
+
+---
+
+### 🚀 **Keeper Fees**
+- **`keeper_fee_bps`**: Incentive for keepers to clear batches  
+- Stored in **`BatchState.keeper_reward_quote_fp`** (accounting only)  
+- Withdrawable via future admin instruction  
+
+---
+
+### 📏 **Fee Constraints**
+- `protocol_fee_bps + referral_fee_bps ≤ fee_bps ≤ 10,000` (100%)  
+
+---
+
+## 🔧 Keeper System
+
+### 🟢 **Unrestricted Mode (Default)**
+- Anyone can call `clear_batch` once `batch_duration_slots` has passed  
+- Ideal for permissionless markets  
+
+---
+
+### 🔐 **Restricted Mode**
+- Set `keeper_restricted = true`  
+- Specify `only_keeper` pubkey  
+- Only **that keeper** can clear batches  
+- Useful for high-frequency or trusted partner operation  
+
+---
+
+### ⏱️ **Timing Guards**
+- **`batch_duration_slots`**: Minimum delay before clearing  
+- **`min_slots_between_clears`**: Additional buffer (e.g., keeper coordination)  
+
+---
+
+## 🔢 Fixed-Point Arithmetic (1e6)
+
+All prices, amounts, and notionals use **1e6 precision** for deterministic math.
+
+### 📘 Examples
+- **Price**: `1,500,000` = **1.5 quote per base**  
+- **Amount**: `2,000,000` = **2.0 base tokens**  
+- **Quote required**:  
+  `2,000,000 × 1,500,000 / 1,000,000 = 3,000,000` (3.0 quote)
+
+---
+
+### 🔄 Conversions
+
+```rust
+// User-facing → fixed-point
+let price_fp = (price_decimal * 1_000_000.0) as u64;
+
+// Fixed-point → user-facing
+let price_decimal = price_fp as f64 / 1_000_000.0;
+
