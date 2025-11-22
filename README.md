@@ -239,3 +239,40 @@ Emits a `MarketView` event with all key market parameters (for off-chain indexer
 
 
 ---
+
+## Data Structures
+
+### **Market**
+Global market state (**412 bytes**).
+
+| Field | Type | Description |
+|------|------|-------------|
+| `authority` | `Pubkey` | Market admin |
+| `base_mint`, `quote_mint` | `Pubkey` | Token mints |
+| `vault_base`, `vault_quote` | `Pubkey` | PDA-owned token accounts |
+| `batch_duration_slots` | `u64` | Batch time window |
+| `current_batch_id` | `u64` | Current batch number |
+| `last_batch_slot` | `u64` | Slot when last batch was cleared |
+| `next_order_id` | `u64` | Monotonic order ID counter |
+| `fee_bps` | `u16` | Total fee in basis points |
+| `max_orders_per_user_per_batch` | `u32` | Per-user order cap |
+| `paused` | `bool` | Emergency pause flag |
+| `max_notional_per_batch_quote_fp` | `u128` | Batch notional cap (quote, 1e6) |
+| `max_notional_per_user_per_batch_quote_fp` | `u128` | User notional cap (quote, 1e6) |
+| `batch_notional_quote_fp` | `u128` | Current batch notional |
+| `max_orders_global_per_batch` | `u32` | Global order cap |
+| `global_orders_in_batch` | `u32` | Current batch order count |
+| `max_price_move_bps` | `u16` | Circuit breaker (0 = disabled) |
+| `last_clearing_price_fp` | `u64` | Last clearing price (1e6) |
+| `keeper_fee_bps` | `u16` | Keeper incentive fee |
+| `keeper_restricted` | `bool` | Restrict clearing to `only_keeper` |
+| `only_keeper` | `Pubkey` | Whitelisted keeper (if restricted) |
+| `protocol_fee_bps` | `u16` | Protocol fee split |
+| `referral_fee_bps` | `u16` | Referral fee split |
+| `protocol_fees_accrued_fp` | `u128` | Accrued protocol fees (1e6) |
+| `min_base_order_fp`, `min_quote_order_fp` | `u64` | Dust order minimums |
+| `pause_reason` | `u8` | Pause reason code |
+
+
+
+---
