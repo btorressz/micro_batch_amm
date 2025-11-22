@@ -276,3 +276,23 @@ Global market state (**412 bytes**).
 
 
 ---
+
+
+### **Order**
+Individual order (**107 bytes**).
+
+| Field | Type | Description |
+|-------|-------|-------------|
+| `user` | `Pubkey` | Order owner |
+| `market` | `Pubkey` | Parent market |
+| `side` | `OrderSide` | Bid or Ask |
+| `limit_price_fp` | `u64` | Limit price (1e6) |
+| `amount_base_fp` | `u64` | Base amount (1e6) |
+| `batch_id` | `u64` | Batch number |
+| `filled` | `bool` | Settled flag |
+| `cancelled` | `bool` | Cancelled flag |
+| `quote_deposit_fp` | `u64` | Quote deposited (bids only) |
+| `id` | `u64` | Unique order ID |
+
+---
+
