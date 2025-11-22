@@ -460,6 +460,8 @@ ___
 | **OrderCancelled** | `cancel_order` | order, batch_id, side |
 | **PausedSet** | `set_paused` | market, paused, reason |
 | **ParamsUpdated** | `set_params` | market, new fee/risk params |
+| **MarketView** | `view_market` | Complete market state snapshot |
+
 
 ---
 
@@ -485,6 +487,7 @@ ___
 | **BatchAlreadyClosed** | Cancellation after batch close |
 | **BatchNotCleared** | Settlement before clearing |
 | **BatchFullySettled** | All volume already settled |
+
 
 | **MarketView** | `view_market` | Complete market state snapshot |
 
