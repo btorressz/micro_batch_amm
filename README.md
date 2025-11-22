@@ -123,3 +123,13 @@ Computes the **uniform clearing price** and rolls to the next batch.
 
 ---
 
+### Algorithm:
+
+- Collect all active orders for the current batch
+- Test candidate prices (all limit prices from orders)
+- For each price, compute bid volume (orders with limit_price >= price) and ask volume (orders with limit_price <= price)
+- Select price that maximizes min(bid_volume, ask_volume)
+- Match orders at that price using a greedy algorithm (sorted by price)
+- Store clearing price and volumes in BatchState
+
+---
