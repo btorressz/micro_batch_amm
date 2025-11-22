@@ -153,4 +153,32 @@ Computes the **uniform clearing price** and rolls to the next batch.
 ###  settle_order
 - Settles a single order after batch clearing.
 
+  
+    ---
+
+### Behavior:
+
+- Crossed Orders (limit price crosses clearing price):
+
+- Bids: Receive base tokens, refund unused quote
+- Asks: Receive quote tokens, no refund (full fill)
+- All-or-nothing: Full amount_base_fp is matched or order is skipped
+
+
+- Uncrossed Orders: Full refund of deposited tokens
+- Deducts protocol fees from quote volume traded
+
+### Accounts:
+
+- user: Order owner (signer)
+- market, batch_state, order: Order and batch context
+- order_fill: Settlement record (initialized if needed)
+- vault_base, vault_quote: Market vaults (sign transfers)
+- user_base_ata, user_quote_ata: User's token accounts
+
+  ### cancel_order
+- Cancels an open order before the batch closes.
+
+   ---
+
 ---
