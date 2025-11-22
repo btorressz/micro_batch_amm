@@ -440,13 +440,11 @@ All prices, amounts, and notionals use **1e6 precision** for deterministic math.
 
 ### 🔄 Conversions
 
-```rust
 // User-facing → fixed-point
-let price_fp = (price_decimal * 1_000_000.0) as u64;
+- let price_fp = (price_decimal * 1_000_000.0) as u64;
 
 // Fixed-point → user-facing
-let price_decimal = price_fp as f64 / 1_000_000.0;
-
+- let price_decimal = price_fp as f64 / 1_000_000.0;
 
 ___
 
