@@ -133,3 +133,24 @@ Computes the **uniform clearing price** and rolls to the next batch.
 - Store clearing price and volumes in BatchState
 
 ---
+
+  **⏱️ Timing:**
+
+- Requires current_slot >= last_batch_slot + batch_duration_slots
+- Optional keeper restrictions via keeper_restricted and only_keeper
+
+  ---
+
+#  Accounts:
+
+- authority: Keeper or admin (signer)
+- market: Market to clear
+- batch_state: Initialized with clearing results
+- remaining_accounts: Triplets of [Order, user_base_ata, user_quote_ata] for all orders in batch
+
+    ---
+
+###  settle_order
+- Settles a single order after batch clearing.
+
+---
