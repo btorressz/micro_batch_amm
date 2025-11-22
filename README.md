@@ -311,3 +311,23 @@ Per-user-per-batch tracking (**93 bytes**).
 
 ---
 
+### **BatchState**
+Post-clearing batch summary (**161 bytes**).
+
+| Field | Type | Description |
+|-------|-------|-------------|
+| `market` | `Pubkey` | Parent market |
+| `batch_id` | `u64` | Batch number |
+| `clearing_price_fp` | `u64` | Uniform clearing price (1e6) |
+| `total_base_traded_fp` | `u64` | Total base volume matched |
+| `total_quote_traded_fp` | `u64` | Total quote volume matched |
+| `created_slot`, `cleared_slot` | `u64` | Creation and clearing slots |
+| `settled` | `bool` | All orders settled flag |
+| `keeper` | `Pubkey` | Keeper who cleared batch |
+| `keeper_reward_quote_fp` | `u128` | Keeper fee earned |
+| `remaining_base_to_settle_fp` | `u128` | Unsettled base volume |
+| `remaining_quote_to_settle_fp` | `u128` | Unsettled quote volume |
+
+
+---
+
