@@ -4,6 +4,8 @@
 
 A Solana program implementing a **micro-batch auction automated market maker (AMM)** with uniform clearing prices, risk controls, and keeper incentives.
 
+**devnet** (https://explorer.solana.com/address/8puhCTsdk8w61XfXTFVjr623BQWkq5NiBx4nyZ8FNffw?cluster=devnet)
+
 ---
 
 ### 📖 Overview
