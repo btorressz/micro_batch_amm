@@ -331,3 +331,20 @@ Post-clearing batch summary (**161 bytes**).
 
 ---
 
+### **OrderFill**
+Settlement record (**73 bytes**).
+
+| Field | Type | Description |
+|-------|-------|-------------|
+| `order` | `Pubkey` | Parent order |
+| `batch_id` | `u64` | Batch number |
+| `filled_base_fp` | `u64` | Base amount matched |
+| `filled_quote_fp` | `u64` | Quote amount matched |
+| `refund_base_fp` | `u64` | Base refunded |
+| `refund_quote_fp` | `u64` | Quote refunded |
+| `claimed` | `bool` | Settlement claimed flag |
+
+
+
+---
+
