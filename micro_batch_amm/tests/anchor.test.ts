@@ -2,6 +2,13 @@
 //in solana playground tests file is anchor.test.ts 
 //these are the test for micro_batch_amm 
 
+//TODO: Fix
+/* 0 passing (8s)
+  1 failing
+  1) micro_batch_amm
+       initialize market, place bid + ask, clear batch, settle bid order:
+     failed to send transaction: Transaction simulation failed: Error processing Instruction 0: Program failed to complete*/ 
+
 import * as splToken from "@solana/spl-token";
 
 describe("micro_batch_amm", () => {
