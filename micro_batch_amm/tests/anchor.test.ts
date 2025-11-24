@@ -2,7 +2,7 @@
 //in solana playground tests file is anchor.test.ts 
 //these are the test for micro_batch_amm 
 
-//TODO: Fix
+//TODO: Fix and add more tests if needed
 /* 0 passing (8s)
   1 failing
   1) micro_batch_amm
